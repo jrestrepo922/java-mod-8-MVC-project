@@ -69,6 +69,14 @@ public class BookService {
                 book.addGenre(optinalGenre.get());
                 optinalGenre.get().addBook(book);
                 genres.add(optinalGenre.get());
+            } else {
+                // create a new genre
+                Genre newGenre = new Genre(genreDTOs.get(i).getName());
+                newGenre = genreRepository.save(newGenre);
+                //bidirectional mapping
+                book.addGenre(newGenre);
+                newGenre.addBook(book);
+                genres.add(newGenre);
             }
         }
 
